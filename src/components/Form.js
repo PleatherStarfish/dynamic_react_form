@@ -1,11 +1,14 @@
 import App from "../App";
-import React from "react";
+import React, {useState} from "react";
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import FormState from '../data/FormState.js'
 
 
 function MainForm() {
-    const [formContent, setFormContent] = FormState;
+
+    // Set initial state from array
+    const [formContent, setFormContent] = useState(FormState);
+
     return (
         <Form>
             <Form.Group controlId="formBasicEmail">
