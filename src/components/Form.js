@@ -1,13 +1,15 @@
 import App from "../App";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import FormState from '../data/FormState.js'
+import _ from 'lodash';
 
 
 function MainForm() {
 
     // Set initial state from array
     const [formContent, setFormContent] = useState(FormState);
+    const [formFeedback, setFormFeedback] = useState({});
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,13 +17,17 @@ function MainForm() {
 
             // Check if target is checkbox
             if (event.target[i].type !== "checkbox") {
-                console.log(event.target[i].value)
+                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].value}));
             }
             else {
-                console.log(event.target[i].checked)
+                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].checked}));
             }
         }
     };
+
+    useEffect(() => {
+        console.log(formFeedback)
+    }, [formFeedback]);
 
     const formGroupsToRender = formContent.map((value, index) => (
         <>
