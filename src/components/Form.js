@@ -1,6 +1,6 @@
 import App from "../App";
 import React, {useState} from "react";
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import FormState from '../data/FormState.js'
 
 
@@ -20,7 +20,7 @@ function MainForm() {
 
     return (
         <Form>
-            {formGroupsToRender}
+            {formGroupsToRender.length > 0 ? formGroupsToRender : <Alert key="wait-alert" variant="primary">Please wait a moment while we look up your form.</Alert>}
         </Form>
     )
 }
