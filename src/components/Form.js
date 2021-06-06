@@ -17,19 +17,25 @@ function MainForm() {
         event.preventDefault();
         for (let i = 0; i< event.target.length; i++) {
 
-            // Check if target is checkbox
-            if (event.target[i].type == "date") {
+            // Check if target is date
+            if (event.target[i].type === "date") {
                 setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: moment(event.target[i].value, 'YYYY-MM-DD').toDate()}));
-            } else if (event.target[i].type !== 'checkbox') {
-                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].value}));
+            }
+
+            // Check if target is checkbox
+            else if (event.target[i].type === 'checkbox') {
+                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].checked}));
                 console.log('date')
             }
+
+            // Other fields
             else {
-                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].checked}));
+                setFormFeedback((prevState) => ({...prevState, [event.target[i].id]: event.target[i].value}));
             }
         }
     };
 
+    // In useEffect we check if a conditional doesn't exists or if a conditional returns true. If either, then render
     useEffect(() => {
         const formGroupsToRender = formContent.map((value, index) => (
             <>
@@ -44,10 +50,11 @@ function MainForm() {
                     <Form.Control type={value.type} placeholder={value.human_label} />
                 </Form.Group>
                 }
-
             </>
         ));
-        setFormGroups([...formGroupsToRender])
+        setFormGroups([...formGroupsToRender]);
+
+        // console.log data after submit
         console.log(formFeedback)
 
     }, [formFeedback]);
