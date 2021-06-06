@@ -39,5 +39,10 @@
 }
 
 .front-page-box {
-  margin-top: 20vh;
+  margin-top: 15vh;
+}
+
+.front-page-h1 {
+  padding-bottom: 5vh;
+  color: #cccccc;
 }
