@@ -9,26 +9,18 @@ function MainForm() {
     // Set initial state from array
     const [formContent, setFormContent] = useState(FormState);
 
+    const formGroupsToRender = formContent.map((value, index) => (
+        <>
+            <Form.Group controlId={value.name}>
+                <Form.Label className="main-form-label sr-only">{value.human_label}</Form.Label>
+                <Form.Control type={value.type} placeholder={value.human_label}/>
+            </Form.Group>
+        </>
+    ));
+
     return (
         <Form>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email"/>
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password"/>
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out"/>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+            {formGroupsToRender}
         </Form>
     )
 }
